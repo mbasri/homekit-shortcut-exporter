@@ -1,17 +1,19 @@
 package data
 
-import "fmt"
+import (
+	"fmt"
+	"time"
+
+	"github.com/google/uuid"
+)
 
 type SensorManager interface {
-	NewSensor(name string) (*Sensor, error)
-	GetSensor(id int) (*Sensor, error)
-
 	UpdateName(name string) error
 	Delete() error
 }
 
 type Sensor struct {
-	Id         int
+	Id         string
 	Name       string
 	CreatedAt  string
 	LastUpdate string
@@ -19,8 +21,9 @@ type Sensor struct {
 
 func NewSensor(name string) (*Sensor, error) {
 	s := &Sensor{
+		Id:        uuid.NewString(),
 		Name:      name,
-		CreatedAt: "createdAt",
+		CreatedAt: time.Now().Format("2006-01-02 15:04:05.000 -0700"),
 	}
 
 	return s, nil
@@ -28,10 +31,11 @@ func NewSensor(name string) (*Sensor, error) {
 
 func (s *Sensor) UpdateName(name string) error {
 	s.Name = name
+	s.LastUpdate = time.Now().Format("2006-01-02 15:04:05.000 -0700")
 	return nil
 }
 
-func Get(id int) (*Sensor, error) {
+func Get(id string) (*Sensor, error) {
 	return &Sensor{}, nil
 }
 

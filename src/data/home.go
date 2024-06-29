@@ -1,17 +1,19 @@
 package data
 
-import "fmt"
+import (
+	"fmt"
+	"time"
+
+	"github.com/google/uuid"
+)
 
 type HomeManager interface {
-	NewHome(name string) (*Home, error)
-	GetHome(id int) (*Home, error)
-
 	UpdateName(name string) error
 	Delete() error
 }
 
 type Home struct {
-	Id         int
+	Id         string
 	Name       string
 	CreatedAt  string
 	LastUpdate string
@@ -19,8 +21,9 @@ type Home struct {
 
 func NewHome(name string) (*Home, error) {
 	h := &Home{
+		Id:        uuid.NewString(),
 		Name:      name,
-		CreatedAt: "createdAt",
+		CreatedAt: time.Now().Format("2006-01-02 15:04:05.000 -0700"),
 	}
 
 	return h, nil
@@ -28,10 +31,11 @@ func NewHome(name string) (*Home, error) {
 
 func (h *Home) UpdateName(name string) error {
 	h.Name = name
+	h.LastUpdate = time.Now().Format("2006-01-02 15:04:05.000 -0700")
 	return nil
 }
 
-func GetHome(id int) (*Home, error) {
+func GetHome(id string) (*Home, error) {
 	return &Home{}, nil
 }
 
@@ -39,6 +43,6 @@ func (h *Home) Delete() error {
 	return nil
 }
 
-func (u Home) String() string {
-	return fmt.Sprintf("Home: %d, Name: %s, CreatedAt: %s, LastUpdate: %s", u.Id, u.Name, u.CreatedAt, u.LastUpdate)
+func (h Home) String() string {
+	return fmt.Sprintf("Home: %d, Name: %s, CreatedAt: %s, LastUpdate: %s", h.Id, h.Name, h.CreatedAt, h.LastUpdate)
 }

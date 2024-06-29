@@ -1,0 +1,45 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+*.out
+
+# Project-specific output
+/bin/
+/pkg/
+
+# Dependency directories (remove the comment below if you want to check in your vendor directory)
+# /vendor/
+
+# Editor files and directories
+.vscode/
+*.swp
+*.swo
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# GoLand files
+.idea/
+
+# Certificate files
+*.pem
+*.crt
+*.key
+*.csr
+
+# Log files
+*.log
+
+# dotenv environment variables file
+.env
+.env.local
+
+# Ignore the binary built by the go build command by default.
+homekit-shortcut-exporter
